@@ -7,6 +7,14 @@ const RESPUESTA = document.getElementById('respuesta');
 const ICONOCLIMA = document.getElementById('icono');
 const ULTIMABUSQUEDA =document.getElementById('ult');
 
+var miultimabusqueda = localStorage.getItem('ultima');
+
+if(miultimabusqueda != undefined){
+
+    mostrarUltima(miultimabusqueda);
+
+}
+
 BOTON.onclick = function(){
     const valorABuscar = BUSQUEDA.value;
     console.log('Ciudad/Provincia/Pais: ', valorABuscar);
@@ -93,12 +101,12 @@ function guardarLocal(datos){
     
     guardado += localStorage.getItem('ultima');
     
-    console.log('Informacion guardada: ', guardado)
+    console.log('String guardado: ', guardado)
     mostrarUltima(guardado);
     
 }
 
-function mostrarUltima(guardado){
+function mostrarUltima(parsear){
     
     ULTIMABUSQUEDA.innerHTML = '';
     
@@ -111,8 +119,10 @@ function mostrarUltima(guardado){
     let ultpresion = '';
     let ultviento = '';
     let ultnombre = '';    
-    
-    ultinfo += JSON.parse(guardado);
+    let ulticono = '';
+
+    ultinfo = JSON.parse(parsear);
+    console.log('Informacion guardada: ', ultinfo)
     
         ulttemperatura += `${ultinfo.main.temp}`;
         ulthumedad += `${ultinfo.main.humidity}`;
@@ -121,9 +131,10 @@ function mostrarUltima(guardado){
         ultsensacion += `${ultinfo.main.feels_like}`;
         ultpresion += `${ultinfo.main.pressure}`;
         ultviento += `${ultinfo.wind.speed}`;
-        ultnombre += `${ultinfo.name}`;    
+        ultnombre += `${ultinfo.name}`;
+        ulticono += `${ultinfo.weather[0].icon}`;   
     
-    ULTIMABUSQUEDA.innerHTML = `<h3 class="col-12">${ultnombre}</h3><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Temperatura actual:<br> ${ulttemperatura}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Humedad actual:<br> ${ulthumedad}%</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Máxima para hoy:<br> ${ulttempmax}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Minima para hoy:<br> ${ulttempmin}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Sensación termica:<br> ${ultsensacion}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Presión atmosférica:<br> ${presion}hPa</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Velocidad del viento:<br> ${ultviento}m/s</p></div>`;
+    ULTIMABUSQUEDA.innerHTML = `<h3 class="col-12">Tu ultima busqueda: ${ultnombre}</h3><img class="col-4 offset-4" src="http://openweathermap.org/img/wn/${ulticono}@4x.png"><div class="row"><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Temperatura actual:<br> ${ulttemperatura}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Humedad actual:<br> ${ulthumedad}%</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Máxima para hoy:<br> ${ulttempmax}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Minima para hoy:<br> ${ulttempmin}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Sensación termica:<br> ${ultsensacion}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Presión atmosférica:<br> ${ultpresion}hPa</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Velocidad del viento:<br> ${ultviento}m/s</p></div></div>`;
     
     
 }
