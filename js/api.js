@@ -56,7 +56,7 @@ function crearRespuesta(data){
         viento += `${data.wind.speed}`;
         nombre += `${data.name}`;
 
-    RESPUESTA.innerHTML = `<h2>${nombre}</h2><ul><li>Temperatura actual: ${temperatura}º</li><li>Humedad actual: ${humedad}%</li><li>Máxima para hoy: ${tempmax}º</li><li>Minima para hoy: ${tempmin}º</li><li>Sensación termica: ${sensacion}º</li><li>Presión atmosférica: ${presion}hPa</li><li>Velocidad del viento: ${viento}m/s</li></ul>`;
+    RESPUESTA.innerHTML = `<h3>${nombre}</h3><ul><li>Temperatura actual: ${temperatura}º</li><li>Humedad actual: ${humedad}%</li><li>Máxima para hoy: ${tempmax}º</li><li>Minima para hoy: ${tempmin}º</li><li>Sensación termica: ${sensacion}º</li><li>Presión atmosférica: ${presion}hPa</li><li>Velocidad del viento: ${viento}m/s</li></ul>`;
 }
 
 function mostrarIcono(icono){
