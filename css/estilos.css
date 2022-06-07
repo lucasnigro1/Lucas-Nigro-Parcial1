@@ -28,7 +28,7 @@ input{
     
     margin-top: 50px;
     height: 40px;
-    
+    background-color: #DEE2FF;
 }
 
 h2{
@@ -57,4 +57,19 @@ button{
     color: white;
     font-weight: bold;
     margin-top: 20px;
+}
+
+.borde{
+    
+    border: 1px solid black;
+    height: 100px;
+    
+}
+
+.borde p{
+    
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.5em;
+    
 }
