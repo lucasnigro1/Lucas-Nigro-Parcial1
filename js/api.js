@@ -5,6 +5,7 @@ const BUSQUEDA = document.getElementById('busqueda');
 const BOTON = document.getElementById('buscar');
 const RESPUESTA = document.getElementById('respuesta');
 const ICONOCLIMA = document.getElementById('icono');
+const ULTIMABUSQUEDA =document.getElementById('ult');
 
 BOTON.onclick = function(){
     const valorABuscar = BUSQUEDA.value;
@@ -19,6 +20,7 @@ BOTON.onclick = function(){
     }).then(function(data){
       
         crearRespuesta(data);
+        guardarLocal(data);
         console.log('Datos mostrados exitosamente');
 
         return data.weather[0].icon;
@@ -82,4 +84,46 @@ function mensajeError(fallo){
 
     RESPUESTA.innerHTML = '<p>La zona solicitada no existe</p>';
     ICONOCLIMA.src = '';
+}
+
+function guardarLocal(datos){
+    let guardado = '';
+    
+    localStorage.setItem('ultima', JSON.stringify(datos));
+    
+    guardado += localStorage.getItem('ultima');
+    
+    console.log('Informacion guardada: ', guardado)
+    mostrarUltima(guardado);
+    
+}
+
+function mostrarUltima(guardado){
+    
+    ULTIMABUSQUEDA.innerHTML = '';
+    
+    let ultinfo = '';
+    let ulttemperatura = '';
+    let ulthumedad = '';
+    let ulttempmax = '';
+    let ulttempmin = '';
+    let ultsensacion = '';
+    let ultpresion = '';
+    let ultviento = '';
+    let ultnombre = '';    
+    
+    ultinfo += JSON.parse(guardado);
+    
+        ulttemperatura += `${ultinfo.main.temp}`;
+        ulthumedad += `${ultinfo.main.humidity}`;
+        ulttempmax += `${ultinfo.main.temp_max}`;
+        ulttempmin += `${ultinfo.main.temp_min}`;
+        ultsensacion += `${ultinfo.main.feels_like}`;
+        ultpresion += `${ultinfo.main.pressure}`;
+        ultviento += `${ultinfo.wind.speed}`;
+        ultnombre += `${ultinfo.name}`;    
+    
+    ULTIMABUSQUEDA.innerHTML = `<h3 class="col-12">${ultnombre}</h3><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Temperatura actual:<br> ${ulttemperatura}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Humedad actual:<br> ${ulthumedad}%</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Máxima para hoy:<br> ${ulttempmax}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Minima para hoy:<br> ${ulttempmin}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Sensación termica:<br> ${ultsensacion}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Presión atmosférica:<br> ${presion}hPa</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Velocidad del viento:<br> ${ultviento}m/s</p></div>`;
+    
+    
 }
