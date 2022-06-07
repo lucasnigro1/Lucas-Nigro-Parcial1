@@ -56,7 +56,7 @@ function crearRespuesta(data){
         viento += `${data.wind.speed}`;
         nombre += `${data.name}`;
 
-    RESPUESTA.innerHTML = `<h3 class="col-12">${nombre}</h3><div class="col-3 borde"><p>Temperatura actual:<br> ${temperatura}º</p></div><div class="col-3 borde"><p>Humedad actual:<br> ${humedad}%</p></div><div class="col-3 borde"><p>Máxima para hoy:<br> ${tempmax}º</p></div><div class="col-3 borde"><p>Minima para hoy:<br> ${tempmin}º</p></div><div class="col-3 borde"><p>Sensación termica:<br> ${sensacion}º</p></div><div class="col-3 borde"><p>Presión atmosférica:<br> ${presion}hPa</p></div><div class="col-3 borde"><p>Velocidad del viento:<br> ${viento}m/s</p></div>`;
+    RESPUESTA.innerHTML = `<h3 class="col-12">${nombre}</h3><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Temperatura actual:<br> ${temperatura}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Humedad actual:<br> ${humedad}%</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Máxima para hoy:<br> ${tempmax}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Minima para hoy:<br> ${tempmin}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Sensación termica:<br> ${sensacion}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Presión atmosférica:<br> ${presion}hPa</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Velocidad del viento:<br> ${viento}m/s</p></div>`;
 }
 
 function mostrarIcono(icono){
