@@ -25,9 +25,11 @@ BOTON.onclick = function(){
     }).then(function(icono){
         mostrarIcono(icono);
         console.log('Icono mostrado exitosamente');
+        BUSQUEDA.value = '';
     })
     .catch(function(err){
         console.log('Algo salio mal', err);
+        mensajeError(err);
     });
 }
                        
@@ -40,6 +42,7 @@ function crearRespuesta(data){
     let sensacion = '';
     let presion = '';
     let viento = '';
+    let nombre = '';
 
     console.log('Propiedades de la ciudad: ', data);
 
@@ -51,8 +54,9 @@ function crearRespuesta(data){
         sensacion += `${data.main.feels_like}`;
         presion += `${data.main.pressure}`;
         viento += `${data.wind.speed}`;
+        nombre += `${data.name}`;
 
-    RESPUESTA.innerHTML = `<ul><li>Temperatura actual: ${temperatura}º</li><li>Humedad actual: ${humedad}%</li><li>Maxima para hoy: ${tempmax}º</li><li>Minima para hoy: ${tempmin}º</li><li>Sensacion termica: ${sensacion}º</li><li>Presion atmosferica: ${presion}</li><li>Velocidad del viento: ${viento}</li></ul>`;
+    RESPUESTA.innerHTML = `<h2>${nombre}</h2><ul><li>Temperatura actual: ${temperatura}º</li><li>Humedad actual: ${humedad}%</li><li>Máxima para hoy: ${tempmax}º</li><li>Minima para hoy: ${tempmin}º</li><li>Sensación termica: ${sensacion}º</li><li>Presión atmosférica: ${presion}hPa</li><li>Velocidad del viento: ${viento}m/s</li></ul>`;
 }
 
 function mostrarIcono(icono){
@@ -72,4 +76,10 @@ function mostrarIcono(icono){
         console.log('Algo salio mal', err);
     });
 
+}
+
+function mensajeError(fallo){
+
+    RESPUESTA.innerHTML = '<p>La zona solicitada no existe</p>';
+    ICONOCLIMA.src = '';
 }
