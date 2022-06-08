@@ -1,11 +1,13 @@
 const KEY = "89fd8b7dc89bc3bf6bc5e0ec3850a0cb";
 const SEARCH = "https://api.openweathermap.org/data/2.5/weather?q=";
+const URLVIDEO = "https://www.youtube.com/embed/";
 
 const BUSQUEDA = document.getElementById('busqueda');
 const BOTON = document.getElementById('buscar');
 const RESPUESTA = document.getElementById('respuesta');
 const ICONOCLIMA = document.getElementById('icono');
 const ULTIMABUSQUEDA =document.getElementById('ult');
+const IFRAMEVIDEO = document.getElementById('player');
 
 var miultimabusqueda = localStorage.getItem('ultima');
 
@@ -29,8 +31,8 @@ BOTON.onclick = function(){
       
         crearRespuesta(data);
         guardarLocal(data);
+        mostrarVideo(data);
         console.log('Datos mostrados exitosamente');
-
         return data.weather[0].icon;
     }).then(function(icono){
         mostrarIcono(icono);
@@ -137,4 +139,37 @@ function mostrarUltima(parsear){
     ULTIMABUSQUEDA.innerHTML = `<h3 class="col-12">Tu ultima busqueda: ${ultnombre}</h3><img class="col-4 offset-4" src="http://openweathermap.org/img/wn/${ulticono}@4x.png"><div class="row"><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Temperatura actual:<br> ${ulttemperatura}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Humedad actual:<br> ${ulthumedad}%</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Máxima para hoy:<br> ${ulttempmax}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Minima para hoy:<br> ${ulttempmin}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Sensación termica:<br> ${ultsensacion}º</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Presión atmosférica:<br> ${ultpresion}hPa</p></div><div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 borde"><p>Velocidad del viento:<br> ${ultviento}m/s</p></div></div>`;
     
     
+}
+
+function mostrarVideo(data){
+
+    let codigo = '';
+    let videourl = '';
+
+    codigo = data.weather[0].id;
+
+    if(codigo >= 200 || 531 >= codigo){
+
+        videourl = 'NahYrAGXuvs';
+
+    }if(codigo >= 600 || 622 >= codigo){
+
+        videourl = 'Kz1wHw16GyA';
+
+    }if(codigo >= 701 || 781 >= codigo){
+
+        videourl = 'DBoLieComQw';
+
+    }if(codigo == 800){
+
+        videourl = '2IcdEJ4Jhs0';
+
+    }else{
+
+        videourl = 'IDKU-mZhq8U';
+
+    }
+
+    IFRAMEVIDEO.src = URLVIDEO + videourl + '/?autoplay=1&mute=1';
+
 }
