@@ -83,3 +83,12 @@ iframe{
 
 }
 
+.error{
+    
+    height: 70px;
+    background-color: orangered;
+    font-size: 1.5em;
+    text-indent: 80px;
+    margin-top: 50px;
+}
+
