@@ -3,9 +3,9 @@
 const KEY = "89fd8b7dc89bc3bf6bc5e0ec3850a0cb";
 const SEARCH = "https://api.openweathermap.org/data/2.5/weather?q=";
 const URLVIDEO = "https://www.youtube.com/embed/";
-const PREMAPA = "https://api.tomtom.com/map/1/tile/basic/main/0/";
-const POSTMAPA = ".pbf?view=Unified&language=NGT&key=";
-const KEYMAPA = "qm2XpJ3s0JcYurmhYqGctny7emG4kagA";
+const PREMAPA = "https://www.google.com/maps/embed/v1/view?key=";
+const POSTMAPA = "&zoom=10&maptype=satellite";
+const KEYMAPA = "AIzaSyCgMMtNcdfKCx8WbnC17MgutZ3AkDsKO0s";
 
 //Constantes del DOM:
 
@@ -15,7 +15,7 @@ const RESPUESTA = document.getElementById('respuesta');
 const ICONOCLIMA = document.getElementById('icono');
 const ULTIMABUSQUEDA =document.getElementById('ult');
 const IFRAMEVIDEO = document.getElementById('player');
-const DIVMAPA = document.getElementById('mapa');
+const IFRAMEMAPA = document.getElementById('mapa');
 
 //Buscar datos de la ultima busqueda al abrir la pagina:
 
@@ -196,6 +196,7 @@ function mostrarVideo(data){
     }
 
     IFRAMEVIDEO.src = URLVIDEO + videourl + '/?autoplay=1&mute=1';
+    IFRAMEVIDEO.style.display = 'block';
 
 }
 
@@ -211,11 +212,6 @@ function mostrarMapa(data){
     lat = data.coord.lat;
     lon = data.coord.lon;
     
-    fetch(`${PREMAPA}${lat}/${lon}${POSTMAPA}${KEYMAPA}`)
-    .then(function(response){
-        console.log('Informacion de TOMTOM: ', response);
-    }).catch(function(err){
-        console.log('Algo salio mal', err);
-    });
-
+    IFRAMEMAPA.src = `${PREMAPA}${KEYMAPA}&center=${lat},${lon}${POSTMAPA}`;
+    IFRAMEMAPA.style.display = 'block';
 }
